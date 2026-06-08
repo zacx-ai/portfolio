@@ -74,47 +74,52 @@ export function EspcnSection() {
 
         {/* Video Box Container - المستطيل الرمادي محتضن الفيديو الآن */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="relative max-w-[900px] mx-auto mb-16"
-        >
-          <div className="relative overflow-hidden rounded-lg border border-[#0a0a0a]/10 aspect-[16/9] w-full">
-            {/* Gradient background for the architecture box */}
-            <div
-              className="absolute inset-0 z-0"
-              style={{
-                background:
-                  "linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 40%, #d8d8d8 100%)",
-              }}
-            />
+  initial={{ opacity: 0, y: 20 }}
+  animate={isInView ? { opacity: 1, y: 0 } : {}}
+  transition={{ duration: 0.6, delay: 0.6 }}
+  className="relative max-w-[900px] mx-auto mb-16 w-full"
+>
+  {/* استخدام aspect-video لضمان مرونة الارتفاع التلقائي على الجوال والـ PC */}
+  <div className="relative overflow-hidden rounded-lg border border-[#0a0a0a]/10 aspect-video w-full bg-[#e8e8e8]">
+    
+    {/* Gradient background for the architecture box */}
+    <div
+      className="absolute inset-0 z-0"
+      style={{
+        background:
+          "linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 40%, #d8d8d8 100%)",
+      }}
+    />
 
-            {/* Subtle noise texture overlay */}
-            <div
-              className="absolute inset-0 opacity-30 z-20 pointer-events-none"
-              style={{
-                backgroundImage:
-                  "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E\")",
-                backgroundSize: "128px",
-              }}
-            />
+    {/* Subtle noise texture overlay */}
+    <div
+      className="absolute inset-0 opacity-30 z-20 pointer-events-none"
+      style={{
+        backgroundImage:
+          "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E\")",
+        backgroundSize: "128px",
+      }}
+    />
 
-            {/* عنصر الفيديو التفاعلي مضبوط بالمسار المحلي الصحيح */}
-            <video
-              className="absolute inset-0 w-full h-full object-contain p-4 md:p-8 rounded-lg z-10"
-              autoPlay
-              loop
-              muted
-              playsInline
-            >
-              <source src="/assets/espcn.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+    {/* تم إضافة muted={true} و autoPlay={true} كـ props صريحة لـ React وإضافة preLoad لضمان التخطي الفوري على الجوال */}
+    <video
+      className="absolute inset-0 w-full h-full object-contain z-10"
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+      muted={true} // تأكيد إضافي لـ React لضمان كتم الصوت الإجباري على Safari
+      autoPlay={true}
+    >
+      <source src="/assets/espcn.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
 
-            {/* طبقة فلتر ناعمة جداً للمزج البصري */}
-            <div className="absolute inset-0 bg-black/5 pointer-events-none z-30 mix-blend-multiply" />
-          </div>
-        </motion.div>
+    {/* طبقة تباين ناعمة فوق الفيديو */}
+    <div className="absolute inset-0 bg-black/5 pointer-events-none z-30 mix-blend-multiply" />
+  </div>
+</motion.div>
 
         {/* Project description */}
         <motion.div

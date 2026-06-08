@@ -8,16 +8,17 @@ export function CustomCursor() {
   const [isOverDark, setIsOverDark] = useState(false);
 
   useEffect(() => {
+    // 1. فحص ما إذا كان الجهاز يدعم اللمس (جوال/تابلت) لإيقاف الكود فوراً
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) return;
+
     const cursor = cursorRef.current;
     if (!cursor) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       setIsVisible(true);
-
-      // تحريك المؤشر الرئيسي مباشرة مع حركة اليد بدون تأخير النقاط
       cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
 
-      // الفحص الذكي لعناصر الخلفية المظلمة لقلب لون الكروسهاير للابيض عند الحاجة
       const elementBelow = document.elementFromPoint(e.clientX, e.clientY);
       if (elementBelow) {
         const section = elementBelow.closest("section");
@@ -38,11 +39,12 @@ export function CustomCursor() {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, []); // مصفوفة فارغة لأننا حذفنا متغير التتبع القديم للأثر
+  }, []);
 
   return (
     <div
       ref={cursorRef}
+      // 2. الكلاس hidden md:block يضمن عدم حجز أي مساحة في الجوال
       className="custom-cursor hidden md:block"
       style={{
         opacity: isVisible ? 1 : 0,
