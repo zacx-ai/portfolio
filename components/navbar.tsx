@@ -30,7 +30,7 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-white border-b border-[#1a1a1a]" : "bg-transparent"
+          scrolled ? "bg-white border-b border-neutral-200" : "bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -42,7 +42,7 @@ export function Navbar() {
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - تم تغيير لون الخطوط إلى الأسود ليتناسب مع الخلفية البيضاء */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden flex flex-col gap-1.5 p-2"
@@ -50,15 +50,15 @@ export function Navbar() {
             >
               <motion.span
                 animate={mobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                className="w-6 h-px bg-white block"
+                className="w-6 h-px bg-black block"
               />
               <motion.span
                 animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="w-6 h-px bg-white block"
+                className="w-6 h-px bg-black block"
               />
               <motion.span
                 animate={mobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                className="w-6 h-px bg-white block"
+                className="w-6 h-px bg-black block"
               />
             </button>
           </div>
@@ -72,7 +72,7 @@ export function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black md:hidden"
+            className="fixed inset-0 z-40 bg-white md:hidden" // تم تحويل خلفية القائمة للأسفل إلى بيضاء
           >
             <div className="flex flex-col items-center justify-center h-full gap-8">
               {navLinks.map((link, i) => (
@@ -83,7 +83,8 @@ export function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-2xl font-light tracking-[0.2em] uppercase text-[#555] hover:text-white transition-colors"
+                  // تم تعديل التباين هنا: اللون الافتراضي أسود ناعم، وعند الهوفر يصبح أسود غامق وقوي
+                  className="text-2xl font-light tracking-[0.2em] uppercase text-neutral-600 hover:text-black transition-colors"
                 >
                   {link.label}
                 </motion.a>
@@ -104,7 +105,6 @@ function NavLink({ href, label }: { href: string; label: string }) {
     const rect = linkRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
-    const maxShift = 5;
     linkRef.current.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
   };
 
@@ -119,7 +119,8 @@ function NavLink({ href, label }: { href: string; label: string }) {
       href={href}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="text-[11px] tracking-[0.2em] uppercase text-[#555] hover:text-white transition-colors draw-underline magnetic-btn"
+      // التعديل الجذري: اللون الافتراضي أسود واضح (text-black)، وعند الهوفر يتحول لرمادي ناعم (hover:text-neutral-500) بدلاً من الأبيض
+      className="text-[11px] tracking-[0.2em] uppercase text-black hover:text-neutral-500 transition-colors draw-underline magnetic-btn"
     >
       {label}
     </a>

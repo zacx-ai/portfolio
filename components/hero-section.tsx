@@ -23,17 +23,31 @@ export function HeroSection() {
     <section className="relative h-screen w-full bg-white flex items-center justify-center overflow-hidden">
       {/* Corner labels */}
       <div className="absolute top-24 left-6 md:left-12">
-        <span className="text-[11px] tracking-[0.3em] text-[#222] writing-mode-vertical transform -rotate-180 block"
-              style={{ writingMode: "vertical-rl" }}>
-          2025
-        </span>
+      <span className="text-[11px] tracking-[0.3em] text-[#222] block font-mono"
+      style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
+  {"10111100101 01001001 01001010 01000111 01011100 01011101".split("").map((c, i) => (
+    <motion.span
+      key={i}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: [0, 1, 0.3, 1] }}
+      transition={{ delay: 0.5 + i * 0.04, duration: 0.7 }}
+    >{c}</motion.span>
+  ))}
+</span>
       </div>
 
       <div className="absolute top-24 right-6 md:right-12">
-        <span className="text-[11px] tracking-[0.3em] text-[#222] writing-mode-vertical block"
-              style={{ writingMode: "vertical-rl" }}>
-          AI ENGINEER · SDAIA
-        </span>
+      <span className="text-[11px] tracking-[0.3em] text-[#222] block font-mono"
+      style={{ writingMode: "vertical-rl" }}>
+  {"01000001 01001001 00100000 01000101 01001110 01000111".split("").map((c, i) => (
+    <motion.span
+      key={i}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: [0, 1, 0.3, 1] }}
+      transition={{ delay: 0.5 + i * 0.04, duration: 0.7 }}
+    >{c}</motion.span>
+  ))}
+</span>
       </div>
 
       {/* Main content */}
@@ -46,7 +60,7 @@ export function HeroSection() {
           className="mb-8"
         >
           <span className="text-[10px] tracking-[0.4em] text-[#444]">
-            [ OSAMA ALSHAMMARI ]
+            
           </span>
         </motion.div>
 

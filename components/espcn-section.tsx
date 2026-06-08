@@ -72,17 +72,17 @@ export function EspcnSection() {
           </motion.p>
         </motion.div>
 
-        {/* Architecture box */}
+        {/* Video Box Container - المستطيل الرمادي محتضن الفيديو الآن */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
           className="relative max-w-[900px] mx-auto mb-16"
         >
-          <div className="relative overflow-hidden rounded-lg border border-[#0a0a0a]/10">
+          <div className="relative overflow-hidden rounded-lg border border-[#0a0a0a]/10 aspect-[16/9] w-full">
             {/* Gradient background for the architecture box */}
             <div
-              className="absolute inset-0"
+              className="absolute inset-0 z-0"
               style={{
                 background:
                   "linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 40%, #d8d8d8 100%)",
@@ -91,7 +91,7 @@ export function EspcnSection() {
 
             {/* Subtle noise texture overlay */}
             <div
-              className="absolute inset-0 opacity-30"
+              className="absolute inset-0 opacity-30 z-20 pointer-events-none"
               style={{
                 backgroundImage:
                   "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E\")",
@@ -99,102 +99,20 @@ export function EspcnSection() {
               }}
             />
 
-            <div className="relative p-8 md:p-12">
-              {/* Architecture diagram */}
-              <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
-                {/* Input */}
-                <div className="flex flex-col items-center">
-                  <div className="w-20 h-20 md:w-24 md:h-24 border border-[#0a0a0a]/15 rounded bg-white/60 backdrop-blur-sm flex items-center justify-center mb-3 shadow-sm">
-                    <div
-                      className="w-12 h-12 md:w-14 md:h-14 rounded grid grid-cols-2 grid-rows-2 gap-0.5 p-1"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, #d0d0d0 0%, #b8b8b8 100%)",
-                      }}
-                    >
-                      {[...Array(4)].map((_, i) => (
-                        <div
-                          key={i}
-                          className="rounded-sm"
-                          style={{
-                            background:
-                              "linear-gradient(135deg, #a0a0a0 0%, #888 100%)",
-                          }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <span className="text-[10px] tracking-[0.2em] text-[#555]">
-                    LOW-RES
-                  </span>
-                </div>
+            {/* عنصر الفيديو التفاعلي مضبوط بالمسار المحلي الصحيح */}
+            <video
+              className="absolute inset-0 w-full h-full object-contain p-4 md:p-8 rounded-lg z-10"
+              autoPlay
+              loop
+              muted
+              playsInline
+            >
+              <source src="/assets/espcn.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
 
-                {/* Arrow */}
-                <div className="text-[#999] text-2xl rotate-90 md:rotate-0">
-                  {"->"}
-                </div>
-
-                {/* ESPCN Block */}
-                <div className="flex flex-col items-center">
-                  <div className="px-6 py-4 border border-[#0a0a0a]/20 rounded bg-white/70 backdrop-blur-sm shadow-sm mb-3">
-                    <span className="text-[11px] tracking-[0.15em] text-[#333]">
-                      ESPCN + TEMPORAL
-                    </span>
-                  </div>
-                  <span className="text-[10px] tracking-[0.2em] text-[#555]">
-                    SUB-PIXEL CONV
-                  </span>
-                </div>
-
-                {/* Arrow */}
-                <div className="text-[#999] text-2xl rotate-90 md:rotate-0">
-                  {"->"}
-                </div>
-
-                {/* Output */}
-                <div className="flex flex-col items-center">
-                  <div className="w-28 h-28 md:w-32 md:h-32 border border-[#0a0a0a]/15 rounded bg-white/60 backdrop-blur-sm flex items-center justify-center mb-3 shadow-sm">
-                    <div
-                      className="w-20 h-20 md:w-24 md:h-24 rounded grid grid-cols-4 grid-rows-4 gap-0.5 p-1"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, #e0e0e0 0%, #c8c8c8 100%)",
-                      }}
-                    >
-                      {[...Array(16)].map((_, i) => (
-                        <div
-                          key={i}
-                          className="rounded-sm"
-                          style={{
-                            background:
-                              "linear-gradient(135deg, #aaa 0%, #888 100%)",
-                          }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <span className="text-[10px] tracking-[0.2em] text-[#555]">
-                    HIGH-RES
-                  </span>
-                </div>
-              </div>
-
-              {/* Temporal frames */}
-              <div className="mt-8 flex justify-center">
-                <div className="flex items-center gap-4">
-                  {[0.25, 0.45, 0.65, 1].map((opacity, i) => (
-                    <div
-                      key={i}
-                      className="w-8 h-8 rounded border border-[#0a0a0a]/20 bg-white/40"
-                      style={{ opacity }}
-                    />
-                  ))}
-                  <span className="text-[10px] tracking-[0.2em] text-[#555] ml-4">
-                    FRAME CONSISTENCY
-                  </span>
-                </div>
-              </div>
-            </div>
+            {/* طبقة فلتر ناعمة جداً للمزج البصري */}
+            <div className="absolute inset-0 bg-black/5 pointer-events-none z-30 mix-blend-multiply" />
           </div>
         </motion.div>
 
