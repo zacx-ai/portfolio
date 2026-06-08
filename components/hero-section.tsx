@@ -128,7 +128,7 @@ export function HeroSection() {
           className="mt-12"
         >
           <span className="text-[11px] tracking-[0.1em] text-[#333]">
-            GPA 3.986 · University of Hail
+            GPA 3.986/4.00
           </span>
         </motion.div>
       </div>
