@@ -7,15 +7,6 @@ export function EspcnSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  const techStack = [
-    "PyTorch",
-    "ESPCN",
-    "SRCNN",
-    "Sub-pixel Convolution",
-    "Computer Vision",
-    "From Scratch",
-  ];
-
   return (
     <section
       ref={sectionRef}
@@ -43,83 +34,65 @@ export function EspcnSection() {
           <h2 className="text-5xl md:text-7xl font-light tracking-tight mb-4">
             ESPCN Temporal
           </h2>
-          <p className="text-2xl md:text-3xl font-light mb-8 text-[#333]">
+          <p className="text-2xl md:text-3xl font-light mb-6 text-[#333]">
             Super-Resolution
           </p>
 
-          {/* Tech stack pills */}
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
-            {techStack.map((tech, index) => (
-              <motion.span
-                key={tech}
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.4 + index * 0.05 }}
-                className="px-4 py-2 text-[11px] tracking-[0.15em] border border-[#0a0a0a]/20 rounded-full hover:bg-[#0a0a0a] hover:text-[#f5f5f5] transition-colors cursor-default"
-              >
-                {tech}
-              </motion.span>
-            ))}
-          </div>
-
           <motion.p
             initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 0.6 } : {}}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-[13px] tracking-[0.1em] text-[#333]"
+            animate={isInView ? { opacity: 0.7 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-[13px] tracking-[0.2em] text-[#333]"
           >
-            Computer Vision · From Scratch · Inspired by DLSS
+            ESPCN · Optical Flow Generator · Temporal
           </motion.p>
         </motion.div>
 
-        {/* Video Box Container - المستطيل الرمادي محتضن الفيديو الآن */}
+        {/* Video Box Container */}
         <motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={isInView ? { opacity: 1, y: 0 } : {}}
-  transition={{ duration: 0.6, delay: 0.6 }}
-  className="relative max-w-[900px] mx-auto mb-16 w-full"
->
-  {/* استخدام aspect-video لضمان مرونة الارتفاع التلقائي على الجوال والـ PC */}
-  <div className="relative overflow-hidden rounded-lg border border-[#0a0a0a]/10 aspect-video w-full bg-[#e8e8e8]">
-    
-    {/* Gradient background for the architecture box */}
-    <div
-      className="absolute inset-0 z-0"
-      style={{
-        background:
-          "linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 40%, #d8d8d8 100%)",
-      }}
-    />
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="relative max-w-[900px] mx-auto mb-16 w-full"
+        >
+          <div className="relative overflow-hidden rounded-lg border border-[#0a0a0a]/10 w-full bg-[#e8e8e8]">
 
-    {/* Subtle noise texture overlay */}
-    <div
-      className="absolute inset-0 opacity-30 z-20 pointer-events-none"
-      style={{
-        backgroundImage:
-          "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E\")",
-        backgroundSize: "128px",
-      }}
-    />
+            {/* Gradient background */}
+            <div
+              className="absolute inset-0 z-0"
+              style={{
+                background:
+                  "linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 40%, #d8d8d8 100%)",
+              }}
+            />
 
-    {/* تم إضافة muted={true} و autoPlay={true} كـ props صريحة لـ React وإضافة preLoad لضمان التخطي الفوري على الجوال */}
-    <video
-      className="absolute inset-0 w-full h-full object-contain z-10"
-      autoPlay
-      loop
-      muted
-      playsInline
-      preload="auto"
-      muted={true} // تأكيد إضافي لـ React لضمان كتم الصوت الإجباري على Safari
-      autoPlay={true}
-    >
-      <source src="/assets/espcn.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+            {/* Video */}
+            <video
+              className="relative w-full h-auto block z-10"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+            >
+              <source src="/assets/espcn.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
 
-    {/* طبقة تباين ناعمة فوق الفيديو */}
-    <div className="absolute inset-0 bg-black/5 pointer-events-none z-30 mix-blend-multiply" />
-  </div>
-</motion.div>
+            {/* Noise overlay */}
+            <div
+              className="absolute inset-0 opacity-30 z-20 pointer-events-none"
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E\")",
+                backgroundSize: "128px",
+              }}
+            />
+
+            {/* Contrast overlay */}
+            <div className="absolute inset-0 bg-black/5 pointer-events-none z-30 mix-blend-multiply" />
+          </div>
+        </motion.div>
 
         {/* Project description */}
         <motion.div
@@ -129,30 +102,24 @@ export function EspcnSection() {
           className="max-w-3xl mx-auto text-center"
         >
           <p className="text-lg md:text-xl font-light leading-relaxed text-[#222] mb-8">
-            Custom temporal super-resolution model built from scratch in PyTorch
-            — inspired by NVIDIA DLSS. Enhanced ESPCN architecture with temporal
-            stability across frames using sub-pixel convolution, measurably
-            outperforming baseline SRCNN in both quality and temporal coherence.
+            Custom temporal super-resolution pipeline built from scratch in PyTorch —
+            combining ESPCN with optical flow motion estimation for temporal stability
+            across frames, accelerated with TensorRT for real-time inference. Measurably
+            outperforms baseline SRCNN in both visual quality and temporal coherence.
           </p>
 
           <div className="flex flex-wrap justify-center gap-8 text-[12px] tracking-[0.15em] text-[#555]">
             <div className="flex flex-col items-center">
-              <span className="text-3xl font-light text-[#0a0a0a] mb-1">
-                4x
-              </span>
+              <span className="text-3xl font-light text-[#0a0a0a] mb-1">2x</span>
               <span>UPSCALING</span>
             </div>
             <div className="flex flex-col items-center">
-              <span className="text-3xl font-light text-[#0a0a0a] mb-1">
-                PyTorch
-              </span>
-              <span>FROM SCRATCH</span>
+              <span className="text-3xl font-light text-[#0a0a0a] mb-1">Optical Flow</span>
+              <span>TEMPORAL STABLE</span>
             </div>
             <div className="flex flex-col items-center">
-              <span className="text-3xl font-light text-[#0a0a0a] mb-1">
-                {">"}SRCNN
-              </span>
-              <span>PERFORMANCE</span>
+              <span className="text-3xl font-light text-[#0a0a0a] mb-1">TensorRT</span>
+              <span>ACCELERATED</span>
             </div>
           </div>
         </motion.div>

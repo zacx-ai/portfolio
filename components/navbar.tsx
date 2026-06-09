@@ -2,10 +2,11 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { AboutModal } from "@/components/about-modal";
 
 const navLinks = [
   { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
+  { label: "About", href: "#about", isModal: true },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];
@@ -13,12 +14,12 @@ const navLinks = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 80);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -35,14 +36,25 @@ export function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-center h-20">
+
             {/* Desktop Nav Links */}
             <div className="hidden md:flex items-center gap-12">
-              {navLinks.map((link) => (
-                <NavLink key={link.href} href={link.href} label={link.label} />
-              ))}
+              {navLinks.map((link) =>
+                link.isModal ? (
+                  <button
+                    key={link.href}
+                    onClick={() => setAboutOpen(true)}
+                    className="text-[11px] tracking-[0.2em] uppercase text-black hover:text-neutral-500 transition-colors draw-underline magnetic-btn"
+                  >
+                    {link.label}
+                  </button>
+                ) : (
+                  <NavLink key={link.href} href={link.href} label={link.label} />
+                )
+              )}
             </div>
 
-            {/* Mobile Menu Button - تم تغيير لون الخطوط إلى الأسود ليتناسب مع الخلفية البيضاء */}
+            {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden flex flex-col gap-1.5 p-2"
@@ -61,6 +73,7 @@ export function Navbar() {
                 className="w-6 h-px bg-black block"
               />
             </button>
+
           </div>
         </div>
       </motion.nav>
@@ -72,32 +85,56 @@ export function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-white md:hidden" // تم تحويل خلفية القائمة للأسفل إلى بيضاء
+            className="fixed inset-0 z-40 bg-white md:hidden"
           >
             <div className="flex flex-col items-center justify-center h-full gap-8">
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  onClick={() => setMobileMenuOpen(false)}
-                  // تم تعديل التباين هنا: اللون الافتراضي أسود ناعم، وعند الهوفر يصبح أسود غامق وقوي
-                  className="text-2xl font-light tracking-[0.2em] uppercase text-neutral-600 hover:text-black transition-colors"
-                >
-                  {link.label}
-                </motion.a>
-              ))}
+              {navLinks.map((link, i) =>
+                link.isModal ? (
+                  <motion.button
+                    key={link.href}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setAboutOpen(true);
+                    }}
+                    className="text-2xl font-light tracking-[0.2em] uppercase text-neutral-600 hover:text-black transition-colors"
+                  >
+                    {link.label}
+                  </motion.button>
+                ) : (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-2xl font-light tracking-[0.2em] uppercase text-neutral-600 hover:text-black transition-colors"
+                  >
+                    {link.label}
+                  </motion.a>
+                )
+              )}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* About Modal */}
+      <AboutModal isOpen={aboutOpen} onClose={() => setAboutOpen(false)} />
     </>
   );
 }
 
-function NavLink({ href, label }: { href: string; label: string }) {
+function NavLink({
+  href,
+  label,
+}: {
+  href: string;
+  label: string;
+}) {
   const linkRef = useRef<HTMLAnchorElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -119,7 +156,6 @@ function NavLink({ href, label }: { href: string; label: string }) {
       href={href}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      // التعديل الجذري: اللون الافتراضي أسود واضح (text-black)، وعند الهوفر يتحول لرمادي ناعم (hover:text-neutral-500) بدلاً من الأبيض
       className="text-[11px] tracking-[0.2em] uppercase text-black hover:text-neutral-500 transition-colors draw-underline magnetic-btn"
     >
       {label}
