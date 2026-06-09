@@ -75,7 +75,7 @@ export function EspcnSection() {
               playsInline
               preload="auto"
             >
-              <source src="/assets/espcn.mp4" type="video/mp4" />
+              <source src="/assets/final_espcn.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
