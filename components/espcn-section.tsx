@@ -104,21 +104,21 @@ export function EspcnSection() {
           <div className="flex flex-wrap justify-center gap-8 text-[12px] tracking-[0.15em] text-[#555]">
             <div className="flex flex-col items-center">
               <span className="text-3xl font-light text-[#0a0a0a] mb-1">
-                4x
+                2x
               </span>
               <span>UPSCALING</span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-3xl font-light text-[#0a0a0a] mb-1">
-                PyTorch
+                Optical Flow
               </span>
-              <span>FROM SCRATCH</span>
+              <span>TEMPORAL STABLE</span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-3xl font-light text-[#0a0a0a] mb-1">
-                {">"}SRCNN
+                {""}TensorRT
               </span>
-              <span>PERFORMANCE</span>
+              <span>ACCELERATED</span>
             </div>
           </div>
         </motion.div>

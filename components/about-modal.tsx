@@ -108,7 +108,7 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
                   osama-alshammari-ai ↗
                 </span>
               </a>
-
+            {/*
               <a
                 href="https://your-cv-url.com/osama-alshammari-cv.pdf"
                 target="_blank"
@@ -121,7 +121,9 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
                 <span className="text-[11px] tracking-[0.1em] text-[#999] group-hover:text-white/60 transition-colors">
                   PDF ↗
                 </span>
-              </a>
+              </a> */}
+
+
             </div>
 
           </motion.div>

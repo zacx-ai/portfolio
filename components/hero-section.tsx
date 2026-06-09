@@ -113,22 +113,23 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 1.2 }}
           className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-[12px] tracking-[0.15em] text-[#555]"
         >
-          <span>LLM Fine-tuning</span>
+          <span>Neural Architect</span>
           <span className="text-[#333]">|</span>
-          <span>Real-Time AI</span>
+          <span>Embodied Intelligence</span>
           <span className="text-[#333]">|</span>
-          <span>Arabic AI Systems</span>
+          <span>Synthetic Cognition</span>
         </motion.div>
 
-        {/* GPA */}
+        {/* words */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.4 }}
           className="mt-12"
         >
-          <span className="text-[11px] tracking-[0.1em] text-[#333]">
-            GPA 3.986/4.00
+          <span className="text-[20px] tracking-[0.1em] text-[#333]">
+          The machine was silent. I gave it something to say.
+
           </span>
         </motion.div>
       </div>

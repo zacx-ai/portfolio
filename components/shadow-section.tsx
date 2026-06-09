@@ -6,7 +6,7 @@ import { useRef } from "react";
 const techStack = [
   "Unreal Engine 5",
   "Blender",
-  "Google Gemini",
+  "LLM",
   "Faster Whisper",
   "ElevenLabs",
 ];
