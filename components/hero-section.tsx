@@ -127,7 +127,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 1.4 }}
           className="mt-12"
         >
-          <span className="text-[14px] md:text-[20px] tracking-[0.1em] text-[#333]">
+          <span className="text-[10px] md:text-[20px] tracking-[0.1em] text-[#333]">
   The machine was silent. I gave it something to say.
 </span>
         </motion.div>
